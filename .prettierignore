@@ -1,0 +1,9 @@
+*.svg
+.DS_Store
+/node_modules
+/.nuxt/
+.nitro
+.cache
+.output
+.env
+dist
