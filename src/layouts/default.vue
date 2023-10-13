@@ -1,18 +1,26 @@
 <template>
-  <ALayout>
-    <AppSidebar />
+  <AConfigProvider :theme="theme" :locale="jaJP">
     <ALayout>
-      <AppHeader />
-      <div>
-        <ALayoutContent class="content">
-          <AppBreadcrumb />
-          <slot />
-        </ALayoutContent>
-      </div>
-      <AppFooter />
+      <AppSidebar />
+      <ALayout>
+        <AppHeader />
+        <div>
+          <ALayoutContent class="content">
+            <AppBreadcrumb />
+            <slot />
+          </ALayoutContent>
+        </div>
+        <AppFooter />
+      </ALayout>
     </ALayout>
-  </ALayout>
+  </AConfigProvider>
 </template>
+
+<script setup>
+  import jaJP from 'ant-design-vue/es/locale/ja_JP'
+  import '@/utils/dayjs'
+  import { theme } from '@/configs/theme'
+</script>
 
 <style scoped>
   .content {

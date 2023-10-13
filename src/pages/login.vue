@@ -1,45 +1,50 @@
 <template>
-  <div class="form">
-    <div class="logo">
-      <strong>Sample Admin</strong>
+  <AConfigProvider :theme="theme" :locale="jaJP">
+    <div class="form">
+      <div class="logo">
+        <strong>Sample Admin</strong>
+      </div>
+      <AForm
+        :model="formState"
+        :rules="rules"
+        layout="vertical"
+        @finish="handleSubmit"
+      >
+        <AFormItem label="ログインID" name="username" required>
+          <AInput
+            v-model:value="formState.username"
+            autocomplete="off"
+            size="large"
+          />
+        </AFormItem>
+        <AFormItem label="パスワード" name="password" required>
+          <AInputPassword
+            v-model:value="formState.password"
+            autocomplete="off"
+            size="large"
+          />
+        </AFormItem>
+        <AFormItem style="margin-top: 36px">
+          <AButton
+            type="primary"
+            html-type="submit"
+            :loading="isLoading"
+            :block="true"
+            size="large"
+          >
+            ログイン
+          </AButton>
+        </AFormItem>
+      </AForm>
     </div>
-    <AForm
-      :model="formState"
-      :rules="rules"
-      layout="vertical"
-      @finish="handleSubmit"
-    >
-      <AFormItem label="ログインID" name="username" required>
-        <AInput
-          v-model:value="formState.username"
-          autocomplete="off"
-          size="large"
-        />
-      </AFormItem>
-      <AFormItem label="パスワード" name="password" required>
-        <AInputPassword
-          v-model:value="formState.password"
-          autocomplete="off"
-          size="large"
-        />
-      </AFormItem>
-      <AFormItem style="margin-top: 36px">
-        <AButton
-          type="primary"
-          html-type="submit"
-          :loading="isLoading"
-          :block="true"
-          size="large"
-        >
-          ログイン
-        </AButton>
-      </AFormItem>
-    </AForm>
-  </div>
+  </AConfigProvider>
 </template>
 
 <script setup lang="ts">
+  import jaJP from 'ant-design-vue/es/locale/ja_JP'
+  import '@/utils/dayjs'
   import type { Rule } from 'ant-design-vue/es/form'
+  import { theme } from '@/configs/theme'
   import login from '@/services/auth/login'
 
   const router = useRouter()
